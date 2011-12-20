@@ -4,6 +4,7 @@
   "dependencies": {
     "webservice": "0.5.x",
     "get": "0.4.x",
-    "jjw": "0.0.4"
+    "jjw": "0.0.4",
+    "iconv": "1.1.x"
   }
 }
