@@ -96,10 +96,3 @@ exports.departures.schema = {
     optional: false
   }
 };
-
-exports.ping = function(options, callback){
-  setTimeout(function(){
-    callback(null, 'pong');
-  }, 2000);
-}
-exports.ping.description = "this is the ping method, it pongs back after a 2 second delay";
