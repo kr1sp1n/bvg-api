@@ -1,0 +1,9 @@
+{
+  "name": "bvg-api",
+  "version": "0.0.1",
+  "dependencies": {
+    "webservice": "0.5.x",
+    "get": "0.4.x",
+    "jjw": "0.0.4"
+  }
+}
