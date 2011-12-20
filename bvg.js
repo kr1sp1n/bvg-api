@@ -1,7 +1,7 @@
 this.title = "Welcome to bvg webservice!";
 this.name = "bvg api module";
 this.version = "0.0.1";
-//this.endpoint = "http://localhost:8080";
+this.endpoint = "http://bvg-api.herokuapp.com";
 
 var get = require('get');
 var util = require('util'),
