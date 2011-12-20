@@ -1,4 +1,4 @@
-this.title = "Welcome to bvg webservice!";
+this.title = "Welcome to the inofficial bvg webservice!";
 this.name = "bvg api module";
 this.version = "0.0.1";
 this.endpoint = "http://bvg-api.herokuapp.com";
@@ -8,6 +8,7 @@ var util = require('util'),
     jjw = require('jjw');
 
 // you can pass an object -- will return an object with the results matching these keys
+/*
 var scrapers = {
 	stations: function($) {
 		var arr = []
@@ -17,6 +18,7 @@ var scrapers = {
 		return arr;
 	}
 };
+*/
 
 exports.stations = function(options, callback){
 	//http://mobil.bvg.de/IstAbfahrtzeiten/index/mobil?input=Stromstr.+%28Berlin%29
@@ -44,26 +46,34 @@ exports.stations = function(options, callback){
 				});
 				return arr;
 			},
-			departures: function($) {
+			stations: function($) {
+				/*
 				var obj = {};
 				obj.results = [];
 				obj.status = "";
+				*/
+				var stations = [];
 				$('.ivu_result_box').each(function(){
-					if($(this).attr('id')=='ivuStreckeninfos') {
-						obj.status = $.trim($(this).text());
-					} else {
+					if($(this).attr('id')!='ivuStreckeninfos') {
 						$(this).find('.ivu_table').each(function(){
+							var station = {};
+							stations.push(station);
+							station.id = $(this).find('thead tr th').text().match(/Mast:[\s]*(\w*)/)[1];
+							station.departures = [];
 							$(this).find('tbody tr').each(function(){
 								var departure = {};
-								departure.time = $.trim($(this).find('.ivu_table_c_dep').text());
+								departure.time = $(this).find('.ivu_table_c_dep').text().replace(/\s/g, "");
 								departure.line = $.trim($(this).find('.ivu_table_c_line').text());
 								departure.direction = $.trim($(this).find('.catlink').text());
-								obj.results.push(departure);
+								station.departures.push(departure);
 							});
+							
 						});
+					} else {
+						//obj.status = $.trim($(this).text());
 					}
 				});
-				return obj;
+				return stations;
 			}
 		};
 
@@ -85,14 +95,3 @@ exports.stations.schema = {
 		optional: false
 	}
 }
-
-exports.departures = function(options, callback){
-	callback(null, options.input);
-};
-exports.departures.description = "this is the echo method, it echos back your msg";
-exports.departures.schema = {
-  input: { 
-    type: 'string',
-    optional: false
-  }
-};
