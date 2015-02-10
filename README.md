@@ -3,6 +3,8 @@ BVG API
 
 An inofficial API to the BVG (Berlin Transport Services) written in Coffeescript.
 
+[Demo](https://bvg-api.herokuapp.com/station?input=http://bvg-api.herokuapp.com/station?input=Alexanderplatz)
+
 
 Install
 -------------------
