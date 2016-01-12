@@ -22,10 +22,11 @@
     "opendata"
   ],
   "dependencies": {
-    "restify": "^2.8.5",
-    "coffee-script": "^1.9.0",
     "cheerio": "^0.18.0",
-    "request": "^2.53.0"
+    "coffee-script": "^1.9.0",
+    "csv-parse": "^1.0.1",
+    "request": "^2.53.0",
+    "restify": "^2.8.5"
   },
   "devDependencies": {
     "gulp": "^3.8.11",
