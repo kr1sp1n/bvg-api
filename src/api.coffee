@@ -2,16 +2,32 @@
 
 cheerio = require 'cheerio'
 request = require 'request'
+parse = require 'csv-parse'
+fs = require 'fs'
 
 client = request.defaults
   url: "http://mobil.bvg.de/Fahrinfo/bin/stboard.bin/eox"
 version = "0.1.0"
 endpoint = process.env.API_ENDPOINT or "http://localhost:3000"
 
+csv_data = fs.readFileSync("#{__dirname}/../stops.txt")
+
+locations = {}
+
+parse csv_data, {columns: true, objname: 'stop_id'}, (err, output)->
+  console.log err if err
+  locations = output
 
 loadBody = (body)->
   $ = cheerio.load body, normalizeWhitespace: true
   return $
+
+getLocation = (station_id)->
+  s = locations[station_id]
+  if s?
+    return { lat: s.stop_lat, lon: s.stop_lon }
+  else
+    return null
 
 api =
   info: ->
@@ -41,6 +57,7 @@ api =
       station.id = params.id
       station.name = $('#ivu_overview_input strong').first().text().trim()
       station.href = "#{endpoint}/station/#{params.id}"
+      station.location = getLocation(station.id)
       departures = []
       $('.ivu_result_box .ivu_table tr').slice(1).each (i, elem)->
         d = {}
@@ -70,6 +87,7 @@ api =
           id: id
           name: el.text().trim()
           href: "#{endpoint}/station/#{id}"
+          location: getLocation(id)
         stations.push station
 
       done null, stations
