@@ -42,7 +42,7 @@ api =
   getStation: (params, done)->
     query =
       input: params.id
-      boardType: 'dep'
+      boardType: if params.realtime then 'depRT' else 'dep'
       time: params.time
       date: params.date
       # maxJourneys: 10
