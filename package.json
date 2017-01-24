@@ -3,14 +3,15 @@
   "version": "0.1.0",
   "description": "BVG API",
   "author": "kr1sp1n",
-  "main": "index.coffee",
+  "main": "index.js",
   "bugs": {
     "url": "https://github.com/kr1sp1n/bvg-api/issues"
   },
   "homepage": "https://github.com/kr1sp1n/bvg-api",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node_modules/.bin/coffee index.coffee"
+    "start": "node index.js",
+    "dev": "gulp develop"
   },
   "repository": {
     "type": "git",
@@ -22,18 +23,17 @@
     "opendata"
   ],
   "dependencies": {
-    "cheerio": "^0.18.0",
-    "coffee-script": "^1.9.0",
-    "csv-parse": "^1.0.1",
-    "request": "^2.53.0",
-    "restify": "^2.8.5"
+    "cheerio": "^0.22.0",
+    "csv-parse": "^1.1.10",
+    "request": "^2.79.0",
+    "restify": "^4.3.0"
   },
   "devDependencies": {
-    "gulp": "^3.8.11",
-    "gulp-nodemon": "^1.0.5",
-    "gulp-coffeelint": "^0.4.0"
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-nodemon": "^2.2.1"
   },
   "engines": {
-    "node": "0.10.x"
+    "node": "7.4.0"
   }
 }
