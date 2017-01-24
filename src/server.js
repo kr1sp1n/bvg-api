@@ -9,6 +9,7 @@ const server = restify.createServer({
 server.use(restify.queryParser());
 server.use(restify.jsonp());
 server.use(restify.bodyParser());
+server.use(restify.CORS());
 
 server.get('/', (req, res, next) => {
   res.json(api.info());
