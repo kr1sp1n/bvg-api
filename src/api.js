@@ -100,6 +100,23 @@ const api = {
         stations.push(station);
       });
 
+      // parse structure for only one matching station
+      if (stations.length) {
+        const name = $('.desc strong').first().text().trim();
+        const elem = $('.links a').first();
+        const el = $(elem);
+        const href = el.attr('href');
+        const m = re.exec(href);
+        const id = m[1];
+        const station = {
+          id: id,
+          name: name,
+          href: `${endpoint}/station/${id}`,
+          location: getLocation(id),
+        };
+        stations.push(station);
+      }
+
       done(null, stations);
     });
   }
